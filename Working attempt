@@ -1,0 +1,55 @@
+/*
+3. Longest Substring Without Repeating Characters
+Given a string s, find the length of the longest substring without duplicate characters.
+
+Constraints:
+
+0 <= s.length <= 5 * 104
+s consists of English letters, digits, symbols and spaces.
+*/
+
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+    //This is where I create and initialize all of my used values
+        int i = 0;
+        int j = 0;
+        vector <char> lett;
+        vector <int> maxSub;
+        bool test = true;
+        int maxSize=0;
+        //cout << s[i] <<" " << s[j] << "\n";
+        //the while loop to traverse the entire string
+        while(i < s.size()){
+            //cout << s[i] <<" " << s[j] << "\n";
+            //second while loop is used to traverse from the remaining string to the end to compare
+            while(j < i){
+                //check if the next letter is the same if it is then see how long the current substring is and erase it
+                if(s[j]==s[i]){
+                    s.erase(0,j+1);
+                    //cout << s << "\n";
+                    maxSub.push_back(lett.size());
+                    lett.clear();
+                    i=0;
+                    break;
+                }
+                j++;
+            }
+            j=0;
+            lett.push_back(s[i]);
+            i++;
+        }
+        i=0;
+        //going through all the substrings sizes to find the biggest one
+        while(i < maxSub.size()){
+            if(maxSize<maxSub[i]){
+                maxSize = maxSub[i];
+            }
+            i++;
+        }
+        if(0==maxSub.size()||maxSize<lett.size()){
+            maxSize=lett.size();
+        }
+        return maxSize;
+    }
+};
