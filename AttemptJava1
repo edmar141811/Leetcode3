@@ -1,0 +1,50 @@
+/*
+Runtime 473ms
+Beats 5.04%
+
+Memory 46.10 MB
+Beats 5.10%
+
+I think there can be a lot to improve on and I will try to get better at formatting code in Java
+*/
+
+import java.util.Vector;
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int i = 0;
+        int j = 0;
+        Vector <Character> lett = new Vector<>();
+        Vector <Integer> maxSub = new Vector<>();
+        boolean test = true;
+        int maxSize=0;
+        //cout << s[i] <<" " << s[j] << "\n";
+        while(i < s.length()){
+            //cout << s[i] <<" " << s[j] << "\n";
+            while(j < i){
+                if(s.charAt(j)==s.charAt(i)){
+                    s = s.substring(j+1);
+                    //cout << s << "\n";
+                    maxSub.addElement(lett.size());
+                    lett.clear();
+                    i=0;
+                    break;
+                }
+                j++;
+            }
+            j=0;
+            lett.addElement(s.charAt(i));
+            i++;
+        }
+        i=0;
+        while(i < maxSub.size()){
+            if(maxSize<maxSub.get(i)){
+                maxSize = maxSub.get(i);
+            }
+            i++;
+        }
+        if(0==maxSub.size()||maxSize<lett.size()){
+            maxSize=lett.size();
+        }
+        return maxSize;
+    }
+}
